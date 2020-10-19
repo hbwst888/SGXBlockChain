@@ -18,7 +18,7 @@ void ocall_print_string(const char* str) {
 
 
 
-//Èë¿Úº¯Êı
+//å…¥å£å‡½
 int main() {
 	sgx_enclave_id_t eid;
 	sgx_status_t ret = SGX_SUCCESS;
