@@ -39,7 +39,7 @@ void add_deposite(Account& account, int deposite) {
 	account.deposit_amount += deposite;
 }
 
-//释放存款
+//释放存款ssss
 void release_deposite(Account& account) {
 	account.deposit_amount = 0;
 }
