@@ -4,9 +4,9 @@
 
 #include <string>
 
-
 using namespace std;
 
+//teechain中的账户
 class Account {
 public:
 	string public_key;
@@ -21,7 +21,7 @@ public:
 
 };
 
-//创建函数
+//创建账户
 Account create_account(string public_key, string private_key, string blockchain_address, int deposit_amount) {
 	Account account;
 
