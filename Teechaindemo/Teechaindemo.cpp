@@ -21,7 +21,7 @@ public:
 
 };
 
-//创建函数
+//鍒涘缓鍑芥暟
 Account create_account(string public_key, string private_key, string blockchain_address, int deposit_amount) {
 	Account account;
 
@@ -34,17 +34,17 @@ Account create_account(string public_key, string private_key, string blockchain_
 	
 }
 
-//添加存款
+//娣诲姞瀛樻
 void add_deposite(Account& account, int deposite) {
 	account.deposit_amount += deposite;
 }
 
-//释放存款
+//閲婃斁瀛樻
 void release_deposite(Account& account) {
 	account.deposit_amount = 0;
 }
 
-//确定存款是否充足
+//纭畾瀛樻鏄惁鍏呰冻
 bool is_deposite_enough(Account& account, int need_deposite) {
 	if (account.deposit_amount >= need_deposite) {
 		return 1;
@@ -55,7 +55,7 @@ bool is_deposite_enough(Account& account, int need_deposite) {
 	}
 }
 
-//ocall打印输出
+//ocall鎵撳嵃杈撳嚭
 void print(const char* fmt, ...) {
 	char buf[BUFSIZ] = { '\0' };
 	va_list ap;
@@ -67,7 +67,7 @@ void print(const char* fmt, ...) {
 
 
 
-//测试文件
+//娴嬭瘯鏂囦欢
 void foo(char *buf, size_t len) {
 	Account a1 = create_account("123456", "78789", "741741", 100);
 	add_deposite(a1, 20);
