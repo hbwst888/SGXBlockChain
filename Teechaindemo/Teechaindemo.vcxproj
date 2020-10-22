@@ -459,11 +459,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="$(projectname).cpp" />
+    <ClCompile Include="Teechaindemo.cpp" />
     <ClCompile Include="$(projectname)_t.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(projectname)_t.h" />
+    <ClInclude Include="Account.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="$(projectname).edl">
