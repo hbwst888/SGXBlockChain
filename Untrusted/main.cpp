@@ -3,17 +3,35 @@
 #include <tchar.h>
 #include "sgx_urts.h"
 #include "Teechaindemo_u.h"
-
+#include "Account.h"
 using namespace std;
 
 #define ENCLAVE_FILE _T("Teechaindemo.signed.dll")
 #define MAX_BUF_LEN 100
 
 
+
 void ocall_print_string(const char* str) {
 	printf("%s", str);
 }
 
+void printAndChooseCommand() {
+	cout << ("Command Help\n"
+		"Setup Account:0\n"
+		) << endl;
+	int command;
+
+	while (cin >> command)
+	{
+		switch (command)
+		{
+		case 0:
+			SetupAccount();
+		default:
+			break;
+		}
+	}
+}
 
 
 
@@ -31,9 +49,13 @@ int main() {
 		printf("App: error %#x, failed to create enclave.\n", ret);
 		return -1;
 	}
+	Eid = eid;
 	// An Enclave call (ECALL) will happen here.
 	foo(eid, buffer, MAX_BUF_LEN);
 	printf("%s", buffer);
+	cout << endl;
+	printAndChooseCommand();
+	
 	// Destroy the enclave when all Enclave calls finished.
 	if (SGX_SUCCESS != sgx_destroy_enclave(eid))
 		return -1;

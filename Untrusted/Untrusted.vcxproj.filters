@@ -32,6 +32,9 @@
     <ClInclude Include="Teechaindemo_u.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="Account.h">
+      <Filter>资源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\Teechaindemo\Teechaindemo.edl">

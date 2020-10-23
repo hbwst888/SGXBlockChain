@@ -14,6 +14,7 @@ extern "C" {
 #endif
 
 void foo(char* buf, size_t len);
+void Ecall_SetupAccount(char* Public_Key, char* Private_Key, unsigned long long Deposit_Amount);
 
 sgx_status_t SGX_CDECL ocall_print_string(const char* str);
 sgx_status_t SGX_CDECL sgx_oc_cpuidex(int cpuinfo[4], int leaf, int subleaf);
