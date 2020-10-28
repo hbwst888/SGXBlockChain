@@ -21,13 +21,16 @@
     <ClCompile Include="$(projectname)_t.c">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(projectname).cpp">
+    <ClCompile Include="Teechaindemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(projectname)_t.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Account.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
