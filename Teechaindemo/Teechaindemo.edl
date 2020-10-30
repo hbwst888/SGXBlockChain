@@ -5,7 +5,8 @@ enclave {
         /* define ECALLs here. */
         public void foo([out, size=len] char* buf, size_t len);
         
-        public void Ecall_SetupAccount([in,size=100] char* Public_Key ,[in,size=100]char* Private_Key, unsigned long long Deposit_Amount);
+        public void Ecall_SetupAccount([in,size=100] const char* Public_Key ,[in,size=100] char* Private_Key, unsigned long long Deposit_Amount);
+        public void Ecall_ShowAccount();
     };
 
     untrusted {

@@ -33,7 +33,7 @@ typedef struct ms_foo_t {
 } ms_foo_t;
 
 typedef struct ms_Ecall_SetupAccount_t {
-	char* ms_Public_Key;
+	const char* ms_Public_Key;
 	char* ms_Private_Key;
 	unsigned long long ms_Deposit_Amount;
 } ms_Ecall_SetupAccount_t;
@@ -133,7 +133,7 @@ static sgx_status_t SGX_CDECL sgx_Ecall_SetupAccount(void* pms)
 	sgx_lfence();
 	ms_Ecall_SetupAccount_t* ms = SGX_CAST(ms_Ecall_SetupAccount_t*, pms);
 	sgx_status_t status = SGX_SUCCESS;
-	char* _tmp_Public_Key = ms->ms_Public_Key;
+	const char* _tmp_Public_Key = ms->ms_Public_Key;
 	size_t _len_Public_Key = 100;
 	char* _in_Public_Key = NULL;
 	char* _tmp_Private_Key = ms->ms_Private_Key;
@@ -185,7 +185,7 @@ static sgx_status_t SGX_CDECL sgx_Ecall_SetupAccount(void* pms)
 
 	}
 
-	Ecall_SetupAccount(_in_Public_Key, _in_Private_Key, ms->ms_Deposit_Amount);
+	Ecall_SetupAccount((const char*)_in_Public_Key, _in_Private_Key, ms->ms_Deposit_Amount);
 
 err:
 	if (_in_Public_Key) free(_in_Public_Key);
@@ -193,29 +193,38 @@ err:
 	return status;
 }
 
+static sgx_status_t SGX_CDECL sgx_Ecall_ShowAccount(void* pms)
+{
+	sgx_status_t status = SGX_SUCCESS;
+	if (pms != NULL) return SGX_ERROR_INVALID_PARAMETER;
+	Ecall_ShowAccount();
+	return status;
+}
+
 SGX_EXTERNC const struct {
 	size_t nr_ecall;
-	struct {void* call_addr; uint8_t is_priv; uint8_t is_switchless;} ecall_table[2];
+	struct {void* call_addr; uint8_t is_priv; uint8_t is_switchless;} ecall_table[3];
 } g_ecall_table = {
-	2,
+	3,
 	{
 		{(void*)(uintptr_t)sgx_foo, 0, 0},
 		{(void*)(uintptr_t)sgx_Ecall_SetupAccount, 0, 0},
+		{(void*)(uintptr_t)sgx_Ecall_ShowAccount, 0, 0},
 	}
 };
 
 SGX_EXTERNC const struct {
 	size_t nr_ocall;
-	uint8_t entry_table[6][2];
+	uint8_t entry_table[6][3];
 } g_dyn_entry_table = {
 	6,
 	{
-		{0, 0, },
-		{0, 0, },
-		{0, 0, },
-		{0, 0, },
-		{0, 0, },
-		{0, 0, },
+		{0, 0, 0, },
+		{0, 0, 0, },
+		{0, 0, 0, },
+		{0, 0, 0, },
+		{0, 0, 0, },
+		{0, 0, 0, },
 	}
 };
 

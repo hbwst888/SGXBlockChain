@@ -4,6 +4,7 @@
 #include "sgx_urts.h"
 #include "Teechaindemo_u.h"
 #include "Account.h"
+#include	"network.h"
 using namespace std;
 
 #define ENCLAVE_FILE _T("Teechaindemo.signed.dll")
@@ -18,15 +19,25 @@ void ocall_print_string(const char* str) {
 void printAndChooseCommand() {
 	cout << ("Command Help\n"
 		"Setup Account:0\n"
+		"Show Account:1"
 		) << endl;
 	int command;
-
 	while (cin >> command)
 	{
 		switch (command)
 		{
 		case 0:
 			SetupAccount();
+			break;
+		case 1:
+			Ecall_ShowAccount(Eid);
+			break;
+		case 3:
+			server();
+			break;
+		case 4:
+			clint();
+			break;
 		default:
 			break;
 		}
@@ -50,6 +61,7 @@ int main() {
 		return -1;
 	}
 	Eid = eid;
+	cout << Eid << endl;
 	// An Enclave call (ECALL) will happen here.
 	foo(eid, buffer, MAX_BUF_LEN);
 	printf("%s", buffer);

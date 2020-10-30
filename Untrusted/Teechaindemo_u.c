@@ -7,7 +7,7 @@ typedef struct ms_foo_t {
 } ms_foo_t;
 
 typedef struct ms_Ecall_SetupAccount_t {
-	char* ms_Public_Key;
+	const char* ms_Public_Key;
 	char* ms_Private_Key;
 	unsigned long long ms_Deposit_Amount;
 } ms_Ecall_SetupAccount_t;
@@ -117,7 +117,7 @@ sgx_status_t foo(sgx_enclave_id_t eid, char* buf, size_t len)
 	return status;
 }
 
-sgx_status_t Ecall_SetupAccount(sgx_enclave_id_t eid, char* Public_Key, char* Private_Key, unsigned long long Deposit_Amount)
+sgx_status_t Ecall_SetupAccount(sgx_enclave_id_t eid, const char* Public_Key, char* Private_Key, unsigned long long Deposit_Amount)
 {
 	sgx_status_t status;
 	ms_Ecall_SetupAccount_t ms;
@@ -125,6 +125,13 @@ sgx_status_t Ecall_SetupAccount(sgx_enclave_id_t eid, char* Public_Key, char* Pr
 	ms.ms_Private_Key = Private_Key;
 	ms.ms_Deposit_Amount = Deposit_Amount;
 	status = sgx_ecall(eid, 1, &ocall_table_Teechaindemo, &ms);
+	return status;
+}
+
+sgx_status_t Ecall_ShowAccount(sgx_enclave_id_t eid)
+{
+	sgx_status_t status;
+	status = sgx_ecall(eid, 2, &ocall_table_Teechaindemo, NULL);
 	return status;
 }
 
