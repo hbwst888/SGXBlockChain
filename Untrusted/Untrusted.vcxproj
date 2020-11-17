@@ -307,7 +307,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
-    <ClInclude Include="network.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Server.h" />
     <ClInclude Include="Teechaindemo_u.h" />
   </ItemGroup>
   <ItemGroup>

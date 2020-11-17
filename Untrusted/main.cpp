@@ -4,7 +4,8 @@
 #include "sgx_urts.h"
 #include "Teechaindemo_u.h"
 #include "Account.h"
-#include	"network.h"
+#include "Server.h"
+#include "Client.h"
 using namespace std;
 
 #define ENCLAVE_FILE _T("Teechaindemo.signed.dll")
@@ -19,7 +20,9 @@ void ocall_print_string(const char* str) {
 void printAndChooseCommand() {
 	cout << ("Command Help\n"
 		"Setup Account:0\n"
-		"Show Account:1"
+		"Show Account:1\n"
+		"Setup Server:2\n"
+		"Setup Client:3"
 		) << endl;
 	int command;
 	while (cin >> command)
@@ -32,11 +35,11 @@ void printAndChooseCommand() {
 		case 1:
 			Ecall_ShowAccount(Eid);
 			break;
-		case 3:
-			server();
+		case 2:
+			setupServer();
 			break;
-		case 4:
-			clint();
+		case 3:
+			setupClient();
 			break;
 		default:
 			break;
