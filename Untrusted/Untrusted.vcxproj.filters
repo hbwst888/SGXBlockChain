@@ -41,6 +41,9 @@
     <ClInclude Include="Server.h">
       <Filter>资源文件</Filter>
     </ClInclude>
+    <ClInclude Include="ethcontract.h">
+      <Filter>资源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\Teechaindemo\Teechaindemo.edl">
