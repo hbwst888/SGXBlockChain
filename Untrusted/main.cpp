@@ -4,9 +4,7 @@
 #include "sgx_urts.h"
 #include "Teechaindemo_u.h"
 #include "Account.h"
-#include "ethcontract.h"
-#include "Server.h"
-#include "Client.h"
+#include	"network.h"
 using namespace std;
 
 #define ENCLAVE_FILE _T("Teechaindemo.signed.dll")
