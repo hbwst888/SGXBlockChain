@@ -38,6 +38,16 @@ typedef struct ms_Ecall_SetupAccount_t {
 	unsigned long long ms_Deposit_Amount;
 } ms_Ecall_SetupAccount_t;
 
+typedef struct ms_Ecall_LaunchTransaction_t {
+	int ms_retval;
+	unsigned long long ms_Transaction_Amount;
+} ms_Ecall_LaunchTransaction_t;
+
+typedef struct ms_Ecall_ReceiveTransaction_t {
+	int ms_retval;
+	unsigned long long ms_Transaction_Amount;
+} ms_Ecall_ReceiveTransaction_t;
+
 typedef struct ms_ocall_print_string_t {
 	const char* ms_str;
 } ms_ocall_print_string_t;
@@ -201,30 +211,68 @@ static sgx_status_t SGX_CDECL sgx_Ecall_ShowAccount(void* pms)
 	return status;
 }
 
+static sgx_status_t SGX_CDECL sgx_Ecall_LaunchTransaction(void* pms)
+{
+	CHECK_REF_POINTER(pms, sizeof(ms_Ecall_LaunchTransaction_t));
+	//
+	// fence after pointer checks
+	//
+	sgx_lfence();
+	ms_Ecall_LaunchTransaction_t* ms = SGX_CAST(ms_Ecall_LaunchTransaction_t*, pms);
+	sgx_status_t status = SGX_SUCCESS;
+
+
+
+	ms->ms_retval = Ecall_LaunchTransaction(ms->ms_Transaction_Amount);
+
+
+	return status;
+}
+
+static sgx_status_t SGX_CDECL sgx_Ecall_ReceiveTransaction(void* pms)
+{
+	CHECK_REF_POINTER(pms, sizeof(ms_Ecall_ReceiveTransaction_t));
+	//
+	// fence after pointer checks
+	//
+	sgx_lfence();
+	ms_Ecall_ReceiveTransaction_t* ms = SGX_CAST(ms_Ecall_ReceiveTransaction_t*, pms);
+	sgx_status_t status = SGX_SUCCESS;
+
+
+
+	ms->ms_retval = Ecall_ReceiveTransaction(ms->ms_Transaction_Amount);
+
+
+	return status;
+}
+
 SGX_EXTERNC const struct {
 	size_t nr_ecall;
-	struct {void* call_addr; uint8_t is_priv; uint8_t is_switchless;} ecall_table[3];
+	struct {void* call_addr; uint8_t is_priv; uint8_t is_switchless;} ecall_table[5];
 } g_ecall_table = {
-	3,
+	5,
 	{
 		{(void*)(uintptr_t)sgx_foo, 0, 0},
 		{(void*)(uintptr_t)sgx_Ecall_SetupAccount, 0, 0},
 		{(void*)(uintptr_t)sgx_Ecall_ShowAccount, 0, 0},
+		{(void*)(uintptr_t)sgx_Ecall_LaunchTransaction, 0, 0},
+		{(void*)(uintptr_t)sgx_Ecall_ReceiveTransaction, 0, 0},
 	}
 };
 
 SGX_EXTERNC const struct {
 	size_t nr_ocall;
-	uint8_t entry_table[6][3];
+	uint8_t entry_table[6][5];
 } g_dyn_entry_table = {
 	6,
 	{
-		{0, 0, 0, },
-		{0, 0, 0, },
-		{0, 0, 0, },
-		{0, 0, 0, },
-		{0, 0, 0, },
-		{0, 0, 0, },
+		{0, 0, 0, 0, 0, },
+		{0, 0, 0, 0, 0, },
+		{0, 0, 0, 0, 0, },
+		{0, 0, 0, 0, 0, },
+		{0, 0, 0, 0, 0, },
+		{0, 0, 0, 0, 0, },
 	}
 };
 

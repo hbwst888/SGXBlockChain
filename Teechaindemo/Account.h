@@ -68,6 +68,22 @@ void Ecall_ShowAccount() {
 	print(str);
 	print("\n");
 }
+//发起交易
+int Ecall_LaunchTransaction(unsigned long long Transaction_Amount) {
+	//余额不足
+
+	if (Transaction_Amount > local_Account.deposit_amount) {
+		return -1;
+	}
+	//余额充足
+	local_Account.deposit_amount -= Transaction_Amount;
+	return 1;
+}
+//接受交易
+int Ecall_ReceiveTransaction(unsigned long long Transaction_Amount) {
+	local_Account.deposit_amount += Transaction_Amount;
+	return 1;
+}
 
 
 //创建账户

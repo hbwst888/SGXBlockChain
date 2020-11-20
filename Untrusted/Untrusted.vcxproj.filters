@@ -38,10 +38,10 @@
     <ClInclude Include="Client.h">
       <Filter>资源文件</Filter>
     </ClInclude>
-    <ClInclude Include="Server.h">
+    <ClInclude Include="ethcontract.h">
       <Filter>资源文件</Filter>
     </ClInclude>
-    <ClInclude Include="ethcontract.h">
+    <ClInclude Include="Server.h">
       <Filter>资源文件</Filter>
     </ClInclude>
   </ItemGroup>

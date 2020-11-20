@@ -3,6 +3,10 @@
 #include <cstdio>
 #include<iostream>
 #include<string>
+#include <tchar.h>
+#include "Account.h"
+#include "sgx_urts.h"
+#include "Teechaindemo_u.h"
 //#include<WinSock2.h>
 #pragma comment(lib,"ws2_32.lib")
 using namespace std;
@@ -28,9 +32,13 @@ DWORD WINAPI ServerThread(LPVOID lpParameter) {
 			cout << "接收消息结束！" << endl;
 			break;
 		}
+		int ret;
+		Ecall_ReceiveTransaction(Eid, &ret, unsigned long long(RecvBuf));
+
 		memset(RecvBuf, 0, sizeof(RecvBuf));
-		cout << "请输入要发送到客户端的信息：" << endl;
-		cin >> SendBuf;
+		/*cout << "请输入要发送到客户端的信息：" << endl;
+		cin >> SendBuf;*/
+		strcpy(SendBuf, "交易成功");
 		int k = 0;
 		k = send(*ClientSocket, SendBuf, sizeof(SendBuf), 0);
 		if (k < 0) {

@@ -22,5 +22,6 @@ void SetupAccount() {
 	cin >> Private_Key;
 	cout << "Amount:" << endl;
 	cin >> amount;
-	Ecall_SetupAccount(Eid, a, Private_Key, amount);
+	Ecall_SetupAccount(Eid, Public_Key, Private_Key, amount);
 }
+

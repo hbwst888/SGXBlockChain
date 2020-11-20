@@ -7,6 +7,8 @@ enclave {
         
         public void Ecall_SetupAccount([in,size=100] const char* Public_Key ,[in,size=100] char* Private_Key, unsigned long long Deposit_Amount);
         public void Ecall_ShowAccount();
+        public int Ecall_LaunchTransaction(unsigned long long Transaction_Amount);
+        public int Ecall_ReceiveTransaction(unsigned long long Transaction_Amount);
     };
 
     untrusted {

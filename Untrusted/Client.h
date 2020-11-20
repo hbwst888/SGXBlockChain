@@ -3,6 +3,10 @@
 #include <cstdio>
 #include<iostream>
 #include<string>
+#include <tchar.h>
+#include "Account.h"
+#include "sgx_urts.h"
+#include "Teechaindemo_u.h"
 //#include<WinSock2.h>
 #pragma comment(lib,"ws2_32.lib")
 using namespace std;
@@ -28,11 +32,24 @@ int setupClient() {
 		cout << "连接失败" << endl;
 		return -1;
 	}
-	cout << "已经连接到服务器，可以向服务器发送消息了！" << endl;
+	cout << "通道建立成功！" << endl;
 	char info[1024], SendBuff[MaxBufSize], RecvBuff[MaxBufSize];
 	while (1) {
-		cout << "请输入要发送的信息,按回车结束发送：" << endl;
+		cout << "请输入发送的交易金额：" << endl;
 		cin >> info;
+		cout << info << endl;
+		if (strcmp(info,"c")==0) {
+			break;
+		}
+		int ret;
+		Ecall_LaunchTransaction(Eid, &ret, unsigned long long(atoi(info)));
+		cout << unsigned long long(atoi(info));
+		if ( ret== -1) {
+			cout << "余额不足请充值" << endl;
+			break;
+		}
+
+
 		if (info[0] == '\0')
 			break;
 		strcpy(SendBuff, info);
@@ -43,6 +60,8 @@ int setupClient() {
 		if (k < 0) {
 			cout << "发送失败" << endl;
 		}
+
+
 		Sleep(500);
 		int n = 0;
 		n = recv(SocketClient, RecvBuff, sizeof(RecvBuff), 0);

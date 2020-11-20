@@ -42,6 +42,8 @@ int SGX_UBRIDGE(SGX_CDECL, sgx_thread_set_multiple_untrusted_events_ocall, (cons
 sgx_status_t foo(sgx_enclave_id_t eid, char* buf, size_t len);
 sgx_status_t Ecall_SetupAccount(sgx_enclave_id_t eid, const char* Public_Key, char* Private_Key, unsigned long long Deposit_Amount);
 sgx_status_t Ecall_ShowAccount(sgx_enclave_id_t eid);
+sgx_status_t Ecall_LaunchTransaction(sgx_enclave_id_t eid, int* retval, unsigned long long Transaction_Amount);
+sgx_status_t Ecall_ReceiveTransaction(sgx_enclave_id_t eid, int* retval, unsigned long long Transaction_Amount);
 
 #ifdef __cplusplus
 }

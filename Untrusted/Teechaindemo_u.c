@@ -12,6 +12,16 @@ typedef struct ms_Ecall_SetupAccount_t {
 	unsigned long long ms_Deposit_Amount;
 } ms_Ecall_SetupAccount_t;
 
+typedef struct ms_Ecall_LaunchTransaction_t {
+	int ms_retval;
+	unsigned long long ms_Transaction_Amount;
+} ms_Ecall_LaunchTransaction_t;
+
+typedef struct ms_Ecall_ReceiveTransaction_t {
+	int ms_retval;
+	unsigned long long ms_Transaction_Amount;
+} ms_Ecall_ReceiveTransaction_t;
+
 typedef struct ms_ocall_print_string_t {
 	const char* ms_str;
 } ms_ocall_print_string_t;
@@ -132,6 +142,26 @@ sgx_status_t Ecall_ShowAccount(sgx_enclave_id_t eid)
 {
 	sgx_status_t status;
 	status = sgx_ecall(eid, 2, &ocall_table_Teechaindemo, NULL);
+	return status;
+}
+
+sgx_status_t Ecall_LaunchTransaction(sgx_enclave_id_t eid, int* retval, unsigned long long Transaction_Amount)
+{
+	sgx_status_t status;
+	ms_Ecall_LaunchTransaction_t ms;
+	ms.ms_Transaction_Amount = Transaction_Amount;
+	status = sgx_ecall(eid, 3, &ocall_table_Teechaindemo, &ms);
+	if (status == SGX_SUCCESS && retval) *retval = ms.ms_retval;
+	return status;
+}
+
+sgx_status_t Ecall_ReceiveTransaction(sgx_enclave_id_t eid, int* retval, unsigned long long Transaction_Amount)
+{
+	sgx_status_t status;
+	ms_Ecall_ReceiveTransaction_t ms;
+	ms.ms_Transaction_Amount = Transaction_Amount;
+	status = sgx_ecall(eid, 4, &ocall_table_Teechaindemo, &ms);
+	if (status == SGX_SUCCESS && retval) *retval = ms.ms_retval;
 	return status;
 }
 
