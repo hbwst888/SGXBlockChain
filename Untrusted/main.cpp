@@ -4,7 +4,7 @@
 #include "sgx_urts.h"
 #include "Teechaindemo_u.h"
 #include "Account.h"
-
+#include "ethcontract.h"
 #include "Client.h"
 #include "Server.h"
 using namespace std;
@@ -75,20 +75,10 @@ int main() {
 	printf("%s", buffer);
 	cout << endl;
 	printAndChooseCommand();
-	
-	// Destroy the enclave when all Enclave calls finished.
-	if (SGX_SUCCESS != sgx_destroy_enclave(eid))
-		return -1;
-	return 0;
-	
-	
-
-
-	/*
 	//ethcontract测试
-	char transaction_account[] = "0xb34A64432C6Eca44362E36f8dEa9e4f63D1b2508";
-	char receiving_account[] = "0x55161ff956E763759ffbbC35F110C71214a6F2f7";
-	char transaction_private_key[] = "fce7b4aec5ed17877e890a7ce030a0abc6794d1f1853f17f3fd90a7ebd08ebf1";
+	char transaction_account[] = "0x701E6978C946698a0E67CEd4f334f07C864d43db";
+	char receiving_account[] = "0x0c683e9122aa7a43e7844b13f898A17198FfE7CE";
+	char transaction_private_key[] = "0b3a159c5f437c3ce65c1682071888c169c9fadf1bd6ca9f0b5d399c68f97f69";
 	Py_Initialize();
 	char* result = eth_transaction(transaction_account, receiving_account, transaction_private_key, 1);
 	cout << result << endl;
@@ -96,7 +86,19 @@ int main() {
 	int a = eth_query_transaction(txhash);
 	cout << a << endl;
 	//Py_Finalize();
-	*/
+	// Destroy the enclave when all Enclave calls finished.
+	if (SGX_SUCCESS != sgx_destroy_enclave(eid))
+		return -1;
+	return 0;
+	
+	
+	
+	
+
+
+	
+	
+	
 	
 	
 	

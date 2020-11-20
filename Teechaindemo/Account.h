@@ -42,7 +42,7 @@ void Ecall_SetupAccount(const char* Public_Key ,char* Private_Key, unsigned long
 	//ÏÈÄ£Äâ
 	local_Account.public_key = Public_Key;
 	local_Account.private_key = Private_Key;
-	local_Account.deposit_amount = Deposit_Amount;
+	local_Account.deposit_amount += Deposit_Amount;
 	/*const char* str = local_Account.public_key.data();
 	print(str);
 	print(local_Account.private_key);*/
