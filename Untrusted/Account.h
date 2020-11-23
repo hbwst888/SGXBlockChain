@@ -47,8 +47,5 @@ void SetupAccount() {
 		cout << "´æ¿î³É¹¦" << endl;
 	}
 	
-	
-	
-	
 	Ecall_SetupAccount(Eid, Public_Key, Private_Key, amount);
 }
