@@ -26,12 +26,45 @@ string getpath() {
 		path.replace(position, 1, "/");
 		position = path.find("\\");
 	}
-	cout << path << endl;
+	//cout << path << endl;
 	return path;
 }
 
-//执行交易，判断余额是否充足，不充足返回0
-//余额充足情况下，若上一笔交易未上链返回0
+char* eth_verify_account(char* transaction_account, int amount) {
+
+	PyObject* pModule = NULL;
+	PyObject* pFunc = NULL;
+	PyObject* pName = NULL;
+
+	string path = getpath();
+
+	PyRun_SimpleString("import os,sys");
+	PyRun_SimpleString(path.data());
+
+	//调用python文件名。
+	pModule = PyImport_ImportModule("ethcontract");
+
+	//调用函数名
+	pFunc = PyObject_GetAttrString(pModule, "is_account_right");
+
+	//给python传参数
+	PyObject* pArgs = PyTuple_New(2);//参数个数
+	PyTuple_SetItem(pArgs, 0, Py_BuildValue("s", transaction_account)); //参数。
+	PyTuple_SetItem(pArgs, 1, Py_BuildValue("i", amount));
+
+	//调用函数
+	PyObject* pReturn = PyEval_CallObject(pFunc, pArgs);
+
+	//接收python计算好的返回值
+	char* result;
+	PyArg_Parse(pReturn, "s", &result);
+
+	Py_DECREF(pArgs);
+	return result;
+}
+
+//执行交易，判断余额是否充足，不充足返回wrong0
+//余额充足情况下，若上一笔交易未上链返回wrong1
 //交易成功返回交易哈希
 char* eth_transaction(char* transaction_account, char* receiving_account, char* transaction_private_key, int amount) {
 
@@ -99,7 +132,7 @@ int eth_query_transaction(char* txhash) {
 	//接收python计算好的返回值
 	int result;
 	PyArg_Parse(pReturn, "i", &result);//i表示转换成int型变量。在这里，最需要注意的是：PyArg_Parse的最后一个参数，必须加上“&”符号。
-	cout << result << endl;
+	//cout << result << endl;
 
 	Py_DECREF(pArgs);
 	return result;

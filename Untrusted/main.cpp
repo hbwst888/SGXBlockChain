@@ -79,7 +79,10 @@ int main() {
 	return 0;
 	
 	
-
+	
+	
+	
+	
 
 	/*
 	//ethcontract测试
@@ -87,15 +90,22 @@ int main() {
 	char receiving_account[] = "0x55161ff956E763759ffbbC35F110C71214a6F2f7";
 	char transaction_private_key[] = "fce7b4aec5ed17877e890a7ce030a0abc6794d1f1853f17f3fd90a7ebd08ebf1";
 	Py_Initialize();
-	char* result = eth_transaction(transaction_account, receiving_account, transaction_private_key, 1);
+	char* result = eth_transaction(transaction_account, receiving_account, transaction_private_key, 1000);
 	cout << result << endl;
 	char txhash[] = "0x676280e8fb2bf73d893876a76f2bdb5f04f5abd18d80819d19cb4a4e62e566c0";
 	int a = eth_query_transaction(txhash);
 	cout << a << endl;
 	//Py_Finalize();
+	
 	*/
+	/*
+	char transaction_account[] = "c";
 	
+	Py_Initialize();
+	char* a = eth_verify_account(transaction_account,100);
+	cout << a << endl;
 	
+	*/
 	
 }
 
