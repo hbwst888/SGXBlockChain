@@ -35,10 +35,13 @@
     <ClInclude Include="Account.h">
       <Filter>资源文件</Filter>
     </ClInclude>
-    <ClInclude Include="network.h">
+    <ClInclude Include="Client.h">
       <Filter>资源文件</Filter>
     </ClInclude>
     <ClInclude Include="ethcontract.h">
+      <Filter>资源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
       <Filter>资源文件</Filter>
     </ClInclude>
   </ItemGroup>

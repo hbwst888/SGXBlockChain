@@ -42,7 +42,7 @@ void Ecall_SetupAccount(const char* Public_Key ,char* Private_Key, unsigned long
 	//先模拟
 	local_Account.public_key = Public_Key;
 	local_Account.private_key = Private_Key;
-	local_Account.deposit_amount = Deposit_Amount;
+	local_Account.deposit_amount += Deposit_Amount;
 	/*const char* str = local_Account.public_key.data();
 	print(str);
 	print(local_Account.private_key);*/
@@ -67,6 +67,22 @@ void Ecall_ShowAccount() {
 	print("Deposit_Amount:");
 	print(str);
 	print("\n");
+}
+//发起交易
+int Ecall_LaunchTransaction(unsigned long long Transaction_Amount) {
+	//余额不足
+
+	if (Transaction_Amount > local_Account.deposit_amount) {
+		return -1;
+	}
+	//余额充足
+	local_Account.deposit_amount -= Transaction_Amount;
+	return 1;
+}
+//接受交易
+int Ecall_ReceiveTransaction(unsigned long long Transaction_Amount) {
+	local_Account.deposit_amount += Transaction_Amount;
+	return 1;
 }
 
 
