@@ -18,8 +18,10 @@ void Ecall_SetupAccount(const char* Public_Key, char* Private_Key, unsigned long
 void Ecall_ShowAccount(void);
 int Ecall_LaunchTransaction(unsigned long long Transaction_Amount);
 int Ecall_ReceiveTransaction(unsigned long long Transaction_Amount);
+void Ecall_release_deposit(unsigned long long amount);
 
 sgx_status_t SGX_CDECL ocall_print_string(const char* str);
+sgx_status_t SGX_CDECL ocall_eth_transaction(char* account, int amount);
 sgx_status_t SGX_CDECL sgx_oc_cpuidex(int cpuinfo[4], int leaf, int subleaf);
 sgx_status_t SGX_CDECL sgx_thread_wait_untrusted_event_ocall(int* retval, const void* self);
 sgx_status_t SGX_CDECL sgx_thread_set_untrusted_event_ocall(int* retval, const void* waiter);

@@ -9,10 +9,12 @@ enclave {
         public void Ecall_ShowAccount();
         public int Ecall_LaunchTransaction(unsigned long long Transaction_Amount);
         public int Ecall_ReceiveTransaction(unsigned long long Transaction_Amount);
+        public void Ecall_release_deposit(unsigned long long amount);
     };
 
     untrusted {
         /* define OCALLs here. */
         void ocall_print_string([in, string] const char *str);
+        void ocall_eth_transaction([in, string] char *account, int amount);
     };
 };

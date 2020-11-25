@@ -18,6 +18,10 @@ extern "C" {
 #define OCALL_PRINT_STRING_DEFINED__
 void SGX_UBRIDGE(SGX_NOCONVENTION, ocall_print_string, (const char* str));
 #endif
+#ifndef OCALL_ETH_TRANSACTION_DEFINED__
+#define OCALL_ETH_TRANSACTION_DEFINED__
+void SGX_UBRIDGE(SGX_NOCONVENTION, ocall_eth_transaction, (char* account, int amount));
+#endif
 #ifndef SGX_OC_CPUIDEX_DEFINED__
 #define SGX_OC_CPUIDEX_DEFINED__
 void SGX_UBRIDGE(SGX_CDECL, sgx_oc_cpuidex, (int cpuinfo[4], int leaf, int subleaf));
@@ -44,6 +48,7 @@ sgx_status_t Ecall_SetupAccount(sgx_enclave_id_t eid, const char* Public_Key, ch
 sgx_status_t Ecall_ShowAccount(sgx_enclave_id_t eid);
 sgx_status_t Ecall_LaunchTransaction(sgx_enclave_id_t eid, int* retval, unsigned long long Transaction_Amount);
 sgx_status_t Ecall_ReceiveTransaction(sgx_enclave_id_t eid, int* retval, unsigned long long Transaction_Amount);
+sgx_status_t Ecall_release_deposit(sgx_enclave_id_t eid, unsigned long long amount);
 
 #ifdef __cplusplus
 }
