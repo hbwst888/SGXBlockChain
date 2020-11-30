@@ -24,7 +24,7 @@ void SetupAccount() {
 	cout << "Amount:" << endl;
 	cin >> amount;
 	Py_Initialize();
-	char receiving_account[] = "0x55161ff956E763759ffbbC35F110C71214a6F2f7";
+	char receiving_account[] = "0xA28e0005420eA9CeA80aF42841351B1549679D02";
 	char* isaccount = eth_verify_account(Public_Key, amount);
 	while (strcmp("right", isaccount) != 0) {
 		if (strcmp("wrong1", isaccount) == 0) {

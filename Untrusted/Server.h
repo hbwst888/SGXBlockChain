@@ -26,6 +26,7 @@ DWORD WINAPI ServerThread(LPVOID lpParameter) {
 		if (receByt > 0) {
 			cout << "接收到的消息是：" << RecvBuf << "            来自客户端:" << *ClientSocket << endl;
 			// cout<<receByt<<endl;
+
 		}
 		else
 		{
@@ -33,7 +34,7 @@ DWORD WINAPI ServerThread(LPVOID lpParameter) {
 			break;
 		}
 		int ret;
-		Ecall_ReceiveTransaction(Eid, &ret, unsigned long long(RecvBuf));
+		Ecall_ReceiveTransaction(Eid, &ret, unsigned long long(atoi(RecvBuf)));
 
 		memset(RecvBuf, 0, sizeof(RecvBuf));
 		/*cout << "请输入要发送到客户端的信息：" << endl;
@@ -70,8 +71,11 @@ int setupServer() {
 	}
 	int l = listen(ListenSocket, 20);
 	cout << "服务端准备就绪，等待连接请求" << endl;
-
-	while (1) {
+	int x;
+	while (cin>>x) {
+		if (x == 0) {
+			break;
+		}
 		//循环接收客户端连接请求并创建服务线程
 		SOCKET* ClientSocket = new SOCKET;
 		ClientSocket = (SOCKET*)malloc(sizeof(SOCKET));
