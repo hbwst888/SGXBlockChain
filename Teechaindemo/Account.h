@@ -8,7 +8,9 @@
 using namespace std;
 
 //ocall打印输出
-void print(const char* fmt, ...) {
+
+void print(const char* fmt,...) {
+	
 	char buf[BUFSIZ] = { '\0' };
 	va_list ap;
 	va_start(ap, fmt);
@@ -16,6 +18,7 @@ void print(const char* fmt, ...) {
 	va_end(ap);
 	ocall_print_string(buf);
 }
+
 
 //teechain中的账户
 class Account {
@@ -67,6 +70,7 @@ void Ecall_ShowAccount() {
 	print("Deposit_Amount:");
 	print(str);
 	print("\n");
+
 }
 //发起交易
 int Ecall_LaunchTransaction(unsigned long long Transaction_Amount) {
@@ -85,6 +89,23 @@ int Ecall_ReceiveTransaction(unsigned long long Transaction_Amount) {
 	return 1;
 }
 
+//释放存款
+void release_deposit(char* account, int amount) {
+
+
+	ocall_eth_transaction(account, amount);
+}
+
+void Ecall_release_deposit(unsigned long long amount) {
+	if (local_Account.deposit_amount >= amount) {
+
+		release_deposit(&local_Account.public_key[0],amount);
+		local_Account.deposit_amount -= amount;
+	}
+	else {
+		print("存款不充足");
+	}
+}
 
 //创建账户
 //Account create_account(string public_key, string private_key, string blockchain_address, int deposit_amount) {

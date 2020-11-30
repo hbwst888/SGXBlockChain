@@ -22,9 +22,18 @@ typedef struct ms_Ecall_ReceiveTransaction_t {
 	unsigned long long ms_Transaction_Amount;
 } ms_Ecall_ReceiveTransaction_t;
 
+typedef struct ms_Ecall_release_deposit_t {
+	unsigned long long ms_amount;
+} ms_Ecall_release_deposit_t;
+
 typedef struct ms_ocall_print_string_t {
 	const char* ms_str;
 } ms_ocall_print_string_t;
+
+typedef struct ms_ocall_eth_transaction_t {
+	char* ms_account;
+	int ms_amount;
+} ms_ocall_eth_transaction_t;
 
 typedef struct ms_sgx_oc_cpuidex_t {
 	int* ms_cpuinfo;
@@ -58,6 +67,14 @@ static sgx_status_t SGX_CDECL Teechaindemo_ocall_print_string(void* pms)
 {
 	ms_ocall_print_string_t* ms = SGX_CAST(ms_ocall_print_string_t*, pms);
 	ocall_print_string(ms->ms_str);
+
+	return SGX_SUCCESS;
+}
+
+static sgx_status_t SGX_CDECL Teechaindemo_ocall_eth_transaction(void* pms)
+{
+	ms_ocall_eth_transaction_t* ms = SGX_CAST(ms_ocall_eth_transaction_t*, pms);
+	ocall_eth_transaction(ms->ms_account, ms->ms_amount);
 
 	return SGX_SUCCESS;
 }
@@ -104,11 +121,12 @@ static sgx_status_t SGX_CDECL Teechaindemo_sgx_thread_set_multiple_untrusted_eve
 
 static const struct {
 	size_t nr_ocall;
-	void * func_addr[6];
+	void * func_addr[7];
 } ocall_table_Teechaindemo = {
-	6,
+	7,
 	{
 		(void*)(uintptr_t)Teechaindemo_ocall_print_string,
+		(void*)(uintptr_t)Teechaindemo_ocall_eth_transaction,
 		(void*)(uintptr_t)Teechaindemo_sgx_oc_cpuidex,
 		(void*)(uintptr_t)Teechaindemo_sgx_thread_wait_untrusted_event_ocall,
 		(void*)(uintptr_t)Teechaindemo_sgx_thread_set_untrusted_event_ocall,
@@ -162,6 +180,15 @@ sgx_status_t Ecall_ReceiveTransaction(sgx_enclave_id_t eid, int* retval, unsigne
 	ms.ms_Transaction_Amount = Transaction_Amount;
 	status = sgx_ecall(eid, 4, &ocall_table_Teechaindemo, &ms);
 	if (status == SGX_SUCCESS && retval) *retval = ms.ms_retval;
+	return status;
+}
+
+sgx_status_t Ecall_release_deposit(sgx_enclave_id_t eid, unsigned long long amount)
+{
+	sgx_status_t status;
+	ms_Ecall_release_deposit_t ms;
+	ms.ms_amount = amount;
+	status = sgx_ecall(eid, 5, &ocall_table_Teechaindemo, &ms);
 	return status;
 }
 

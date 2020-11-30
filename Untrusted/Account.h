@@ -23,6 +23,7 @@ void SetupAccount() {
 	cin >> Private_Key;
 	cout << "Amount:" << endl;
 	cin >> amount;
+	
 	Py_Initialize();
 	char receiving_account[] = "0xA28e0005420eA9CeA80aF42841351B1549679D02";
 	char* isaccount = eth_verify_account(Public_Key, amount);
@@ -47,5 +48,13 @@ void SetupAccount() {
 		cout << "存款成功" << endl;
 	}
 	
+	
+	
 	Ecall_SetupAccount(Eid, Public_Key, Private_Key, amount);
+}
+
+void Release() {
+	cout << "请输入金额" << endl;
+	cin >> amount;
+	Ecall_release_deposit(Eid, amount);
 }

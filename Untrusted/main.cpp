@@ -13,7 +13,14 @@ using namespace std;
 #define MAX_BUF_LEN 100
 
 
+void ocall_eth_transaction(char* account,int amount) {
 
+	
+	char transaction_account[] = "0x55161ff956E763759ffbbC35F110C71214a6F2f7";
+	char transaction_private_key[] = "43477f8ad781b0536c7db95d3d17f9a2890057c91652380547a76014388ab9e9";
+	char* result = eth_transaction(transaction_account, account, transaction_private_key, amount);
+	cout << result << endl;
+}
 
 
 void ocall_print_string(const char* str) {
@@ -25,7 +32,8 @@ void printAndChooseCommand() {
 		"Setup Account:0\n"
 		"Show Account:1\n"
 		"Setup Server:2\n"
-		"Setup Client:3"
+		"Setup Client:3\n"
+		"Release Deposite:4"
 		) << endl;
 	int command;
 	while (cin >> command)
@@ -44,6 +52,8 @@ void printAndChooseCommand() {
 		case 3:
 			setupClient();
 			break;
+		case 4:
+			Release();
 		default:
 			break;
 		}
@@ -76,6 +86,7 @@ int main() {
 	cout << endl;
 	printAndChooseCommand();
 	//ethcontract测试
+	/*
 	char transaction_account[] = "0x701E6978C946698a0E67CEd4f334f07C864d43db";
 	char receiving_account[] = "0x0c683e9122aa7a43e7844b13f898A17198FfE7CE";
 	char transaction_private_key[] = "0b3a159c5f437c3ce65c1682071888c169c9fadf1bd6ca9f0b5d399c68f97f69";
@@ -85,8 +96,12 @@ int main() {
 	char txhash[] = "0x676280e8fb2bf73d893876a76f2bdb5f04f5abd18d80819d19cb4a4e62e566c0";
 	int a = eth_query_transaction(txhash);
 	cout << a << endl;
+	*/
+	
 	//Py_Finalize();
 	// Destroy the enclave when all Enclave calls finished.
+
+
 	if (SGX_SUCCESS != sgx_destroy_enclave(eid))
 		return -1;
 	return 0;

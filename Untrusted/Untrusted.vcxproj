@@ -169,7 +169,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SGXSDKInstallPath)\include;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SGXSDKInstallPath)\include;C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -193,7 +193,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\10104\AppData\Local\Programs\Python\Python36-32\libs;$(SGXSDKInstallPath)\bin\$(Platform)\Release;%(AdditionalLibraryDirectories);C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\libs</AdditionalLibraryDirectories>
       <AdditionalDependencies>sgx_urts.lib;sgx_uae_service.lib;python36_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -237,7 +237,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SGXSDKInstallPath)\include;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SGXSDKInstallPath)\include;C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -261,7 +261,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SGXSDKInstallPath)\bin\$(Platform)\Release;%(AdditionalLibraryDirectories);C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\10104\AppData\Local\Programs\Python\Python36-32\libs</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SGXSDKInstallPath)\bin\$(Platform)\Release;%(AdditionalLibraryDirectories);C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\libs;C:\Users\DJQ\AppData\Local\Programs\Python\Python36-32\libs</AdditionalLibraryDirectories>
       <AdditionalDependencies>sgx_urts.lib;sgx_uae_service.lib;python36_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -309,6 +309,7 @@
     <ClInclude Include="Account.h" />
     <ClInclude Include="ethcontract.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="Release.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="Teechaindemo_u.h" />
   </ItemGroup>
